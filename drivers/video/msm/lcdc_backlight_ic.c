@@ -172,7 +172,7 @@ void aat1401_set_brightness(int level)
 	spin_unlock(&bl_ctrl_lock);
 }
 
-void ktd253_set_brightness(int level)
+#void ktd253_set_brightness(int level)
 {
 	int pulse;
 	int tune_level = 0;
