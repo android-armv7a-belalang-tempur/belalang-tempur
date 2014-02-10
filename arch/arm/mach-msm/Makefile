@@ -245,6 +245,7 @@ obj-$(CONFIG_MACH_MSM7X27_SURF) += board-msm7x27.o devices-msm7x27.o
 obj-$(CONFIG_MACH_MSM7X27_FFA) += board-msm7x27.o devices-msm7x27.o
 obj-$(CONFIG_ARCH_MSM7X27A) += clock-pcom-lookup.o devices-msm7x27a.o
 obj-$(CONFIG_MACH_JENA) += board-jena.o msm_vibrator_samsung.o
+obj-$(CONFIG_MACH_TREBON) += board-trebon.o msm_vibrator_samsung.o
 #board-7627a-all-objs += board-msm7627a-storage.o board-msm7627a-bt.o board-msm7627a-camera.o
 #board-7627a-all-objs += audio-7627a-devices.o
 #board-7627a-all-objs += board-msm7627a-display.o board-msm7627a-wlan.o board-msm7627a-io.o

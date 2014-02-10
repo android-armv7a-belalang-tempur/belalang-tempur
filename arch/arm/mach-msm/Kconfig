@@ -880,7 +880,7 @@ endmenu
 config MACH_TREBON_HWREV
         hex "MSM7x27A TREBON HWREV"
 		depends on MACH_TREBON
-		default "0x2"
+		default "0x0"
 		help
           Qualcomm TREBON H/W revision.
 
