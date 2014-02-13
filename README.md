@@ -1,15 +1,6 @@
-codeaurora_kernel clone on github
-========================
+Dirty Dev Team -DirtyKernel 3.1.0 ( cyanogenmod 10.2 & cyanogenmod 11)
 
-list of codeaurora msm branches 
-=================
 
-* [Branches list can be found here](https://github.com/RonGokhale/codeaurora_kernel/branches)
 
-list of tags
-=============
+http://www.androidiani.com/forum/samsung-galaxy-ace-plus-modding/349999-team-dirty-developers.html
 
-* [Tags can be found here](https://github.com/RonGokhale/codeaurora_kernel/tags)
-
-branchs and tags will be updated when i get time 
-==============================================
