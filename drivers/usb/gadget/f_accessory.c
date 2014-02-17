@@ -482,7 +482,7 @@ static int acc_unregister_hid(struct acc_dev *dev, int id)
 	return 0;
 }
 
-static int __init create_bulk_endpoints(struct acc_dev *dev,
+static int create_bulk_endpoints(struct acc_dev *dev,
 				struct usb_endpoint_descriptor *in_desc,
 				struct usb_endpoint_descriptor *out_desc)
 {
@@ -840,7 +840,7 @@ static int acc_ctrlrequest(struct usb_composite_dev *cdev,
 			*((u16 *)cdev->req->buf) = PROTOCOL_VERSION;
 			value = sizeof(u16);
 
-			/* clear strings left over from a previous session */
+			/* clear any string left over from a previous session */
 			memset(dev->manufacturer, 0, sizeof(dev->manufacturer));
 			memset(dev->model, 0, sizeof(dev->model));
 			memset(dev->description, 0, sizeof(dev->description));
@@ -1060,16 +1060,20 @@ static int acc_function_set_alt(struct usb_function *f,
 	int ret;
 
 	DBG(cdev, "acc_function_set_alt intf: %d alt: %d\n", intf, alt);
-	ret = usb_ep_enable(dev->ep_in,
-			ep_choose(cdev->gadget,
-				&acc_highspeed_in_desc,
-				&acc_fullspeed_in_desc));
+
+	ret = config_ep_by_speed(cdev->gadget, f, dev->ep_in);
 	if (ret)
 		return ret;
-	ret = usb_ep_enable(dev->ep_out,
-			ep_choose(cdev->gadget,
-				&acc_highspeed_out_desc,
-				&acc_fullspeed_out_desc));
+
+	ret = usb_ep_enable(dev->ep_in);
+	if (ret)
+		return ret;
+
+	ret = config_ep_by_speed(cdev->gadget, f, dev->ep_out);
+	if (ret)
+		return ret;
+
+	ret = usb_ep_enable(dev->ep_out);
 	if (ret) {
 		usb_ep_disable(dev->ep_in);
 		return ret;
@@ -1117,7 +1121,7 @@ static int acc_bind_config(struct usb_configuration *c)
 	dev->cdev = c->cdev;
 	dev->function.name = "accessory";
 	dev->function.strings = acc_strings,
-	dev->function.descriptors = fs_acc_descs;
+	dev->function.fs_descriptors = fs_acc_descs;
 	dev->function.hs_descriptors = hs_acc_descs;
 	dev->function.bind = acc_function_bind;
 	dev->function.unbind = acc_function_unbind;

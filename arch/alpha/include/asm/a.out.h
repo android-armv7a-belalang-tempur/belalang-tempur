@@ -1,6 +1,7 @@
 #ifndef __ALPHA_A_OUT_H__
 #define __ALPHA_A_OUT_H__
 
+
 #include <linux/types.h>
 
 /*
@@ -89,6 +90,8 @@ struct exec
    (sizeof(struct exec) + (x).fh.f_nscns*SCNHSZ + SCNROUND - 1) & ~(SCNROUND - 1))
 
 #ifdef __KERNEL__
+#include <uapi/asm/a.out.h>
+
 
 /* Assume that start addresses below 4G belong to a TASO application.
    Unfortunately, there is no proper bit in the exec header to check.

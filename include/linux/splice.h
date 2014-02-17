@@ -35,6 +35,7 @@ struct splice_desc {
 		void *data;		/* cookie */
 	} u;
 	loff_t pos;			/* file position */
+	loff_t *opos;			/* sendfile: output position */
 	size_t num_spliced;		/* number of bytes already spliced */
 	bool need_wakeup;		/* need to wake up writer */
 };
@@ -88,5 +89,7 @@ extern ssize_t splice_direct_to_actor(struct file *, struct splice_desc *,
  */
 extern int splice_grow_spd(const struct pipe_inode_info *, struct splice_pipe_desc *);
 extern void splice_shrink_spd(struct splice_pipe_desc *);
+extern void spd_release_page(struct splice_pipe_desc *, unsigned int);
 
+extern const struct pipe_buf_operations page_cache_pipe_buf_ops;
 #endif
